@@ -11,7 +11,7 @@ In program.cs file, you should use HerokuEnvVariableConfigurationSource from thi
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
-                    var options = new HerokuEnvVariableConfigOptions
+                    var options = new HECVOptions
                     {
                         BearerToken = "d9c93bf9-ae47-431d-99cc-38d1af51b286",
                         HerokuAppNameOrId = "kale-backoffice-dev",
