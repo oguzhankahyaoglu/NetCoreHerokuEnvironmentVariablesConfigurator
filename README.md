@@ -11,13 +11,17 @@ In program.cs file, you should use HerokuEnvVariableConfigurationSource from thi
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
-                    var options = new HerokuEnvVariableConfigOptions
+                    //Ensure that only on local development machine this configuration is injected. There is no need for environments that work on Heroku directly.
+                    if (builderContext.HostingEnvironment.EnvironmentName != "Development")
+                        return;
+                    var options = new HECVOptions
                     {
                         BearerToken = "d9c93bf9-ae47-431d-99cc-38d1af51b286",
                         HerokuAppNameOrId = "kale-backoffice-dev",
                         OnParseVariables = variables =>
                         {
-                            //variables.Remove("test");
+                            //Dev Environment ayarını çekmemesi için
+                            variables.Remove("ASPNETCORE_ENVIRONMENT");
                         }
                     };
                     config.Add(new HerokuEnvVariableConfigurationSource(options));
