@@ -18,7 +18,7 @@ namespace HerokuEnvironmentVariablesConfigurator
             _options = options;
         }
 
-        private async Task<string> GetVariablesRaw()
+        private async Task<string> GetVariablesRaw(bool hideException)
         {
             using (var client = new HttpClient())
             {
@@ -33,6 +33,10 @@ namespace HerokuEnvironmentVariablesConfigurator
                 catch (Exception ex)
                 {
                     Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Exception: " + ex);
+                    Debugger.Break();
+                    //try second time...
+                    if (hideException)
+                        return await GetVariablesRaw(false);
                     throw new Exception("Exception occured while getting Heroku Environment Variables.", ex);
                 }
             }
@@ -40,7 +44,7 @@ namespace HerokuEnvironmentVariablesConfigurator
 
         public async Task<IDictionary<string, string>> Parse()
         {
-            var str = await GetVariablesRaw();
+            var str = await GetVariablesRaw(true);
             str = str.Replace("{\"", "\"");
             str = str.Replace("\"}", "\"");
             var matches = Regex.Matches(str, @"""([^""]*)"":""([^""]*)""(,?)", RegexOptions.Multiline);
@@ -55,7 +59,7 @@ namespace HerokuEnvironmentVariablesConfigurator
                     continue;
                 _data[key] = value;
             }
-            Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Data count: " + _data.Keys);
+            Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Data count: " + _data.Keys.Count);
             _options?.OnParseVariables(_data);
 
             if (_data.Keys.Count == 0)
