@@ -389,13 +389,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "D:\\Bitbucket\\NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator.csproj",
+      "projectUniqueName": "D:\\Bitbucket\\_NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator.csproj",
       "projectName": "HerokuEnvironmentVariablesConfigurator",
-      "projectPath": "D:\\Bitbucket\\NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator.csproj",
+      "projectPath": "D:\\Bitbucket\\_NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator.csproj",
       "packagesPath": "C:\\Users\\oguz-pc\\.nuget\\packages\\",
-      "outputPath": "D:\\Bitbucket\\NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\obj\\",
+      "outputPath": "D:\\Bitbucket\\_NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -409,7 +409,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "D:\\Bitbucket\\NetCoreHerokuEnvironmentVariablesConfigurator\\HerokuEnvironmentVariablesConfigurator": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

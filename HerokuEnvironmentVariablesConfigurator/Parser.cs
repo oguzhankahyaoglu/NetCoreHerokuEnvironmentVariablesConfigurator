@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -26,10 +27,12 @@ namespace HerokuEnvironmentVariablesConfigurator
                     client.DefaultRequestHeaders.Add("Accept", "application/vnd.heroku+json; version=3");
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _options.BearerToken);
                     var result = await client.GetStringAsync($"https://api.heroku.com/apps/{_options.HerokuAppNameOrId}/config-vars");
+                    Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Result: " + result);
                     return result;
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Exception: " + ex);
                     throw new Exception("Exception occured while getting Heroku Environment Variables.", ex);
                 }
             }
@@ -52,9 +55,14 @@ namespace HerokuEnvironmentVariablesConfigurator
                     continue;
                 _data[key] = value;
             }
-            if(_data.Keys.Count == 0)
-                throw new Exception("Heroku api returned empty response or no environment variables are defined. Check variables in dashboard.");
+            Debug.WriteLine("[HerokuEnvironmentVariablesConfigurator] API Data count: " + _data.Keys);
             _options?.OnParseVariables(_data);
+
+            if (_data.Keys.Count == 0)
+            {
+                Debugger.Break();
+                throw new Exception("Heroku api returned empty response or no environment variables are defined. Check variables in dashboard.");
+            }
             return _data;
         }
     }
