@@ -11,6 +11,9 @@ In program.cs file, you should use HerokuEnvVariableConfigurationSource from thi
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
+                    //Ensure that only on local development machine this configuration is injected. There is no need for environments that work on Heroku directly.
+                    if (builderContext.HostingEnvironment.EnvironmentName != "Development")
+                        return;
                     var options = new HECVOptions
                     {
                         BearerToken = "d9c93bf9-ae47-431d-99cc-38d1af51b286",
