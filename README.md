@@ -20,7 +20,8 @@ In program.cs file, you should use HerokuEnvVariableConfigurationSource from thi
                         HerokuAppNameOrId = "kale-backoffice-dev",
                         OnParseVariables = variables =>
                         {
-                            //variables.Remove("test");
+                            //Dev Environment ayarını çekmemesi için
+                            variables.Remove("ASPNETCORE_ENVIRONMENT");
                         }
                     };
                     config.Add(new HerokuEnvVariableConfigurationSource(options));
